@@ -1,0 +1,109 @@
+#!/usr/bin/env python
+
+
+"""
+* g o a t s e x * g o a t s e x * g o a t s e x *
+g                                               g  
+o /     \             \            /    \       o
+a|       |             \          |      |      a
+t|       `.             |         |       :     t
+s`        |             |        \|       |     s
+e \       | /       /  \\\   --__ \\       :    e
+x  \      \/   _--~~          ~--__| \     |    x  
+*   \      \_-~                    ~-_\    |    *
+g    \_     \        _.--------.______\|   |    g
+o      \     \______// _ ___ _ (_(__>  \   |    o
+a       \   .  C ___)  ______ (_(____>  |  /    a
+t       /\ |   C ____)/      \ (_____>  |_/     t
+s      / /\|   C_____) hello |  (___>   /  \    s
+e     |   (   _C_____)\______/  // _/ /     \   e
+x     |    \  |__   \\_________// (__/       |  x
+*    | \    \____)   `----   --'             |  *
+g    |  \_          ___\       /_          _/ | g
+o   |              /    |     |  \            | o
+a   |             |    /       \  \           | a
+t   |          / /    |         |  \           |t
+s   |         / /      \__/\___/    |          |s
+e  |           /        |    |       |         |e
+x  |          |         |    |       |         |x
+* g o a t s e x * g o a t s e x * g o a t s e x *
+"""
+
+
+import sys
+import re
+import terminalsize as terminal
+
+
+header = """
+* g o a t s e x * g o a t s e x * g o a t s e x *
+g                                               g  
+o /     \             \            /    \       o
+a|       |             \          |      |      a
+t|       `.             |         |       :     t
+s`        |             |        \|       |     s
+e \       | /       /  \\\   --__ \\       :    e
+x  \      \/   _--~~          ~--__| \     |    x  
+*   \      \_-~                    ~-_\    |    *
+g    \_     \        _.--------.______\|   |    g
+o      \     \______// _ ___ _ (_(__>  \   |    o
+a       \   .  C ___)  ______ (_(____>  |  /    a
+t       /\ |   C ____)/      \ (_____>  |_/     t
+s      / /\|   C_____) """
+
+
+""" |  (___>   /  \    s
+e     |   (   _C_____)\______/  // _/ /     \   e
+x     |    \  |__   \\_________// (__/       |  x
+*    | \    \____)   `----   --'             |  *
+g    |  \_          ___\       /_          _/ | g
+o   |              /    |     |  \            | o
+a   |             |    /       \  \           | a
+t   |          / /    |         |  \           |t
+s   |         / /      \__/\___/    |          |s
+e  |           /        |    |       |         |e
+x  |          |         |    |       |         |x
+* g o a t s e x * g o a t s e x * g o a t s e x *
+"""
+
+
+LEFT_EDGE_MARGIN = 24
+RIGHT_EDGE_MARGIN = 21
+LEFT_MARGIN = 23
+RIGHT_MARGIN = 21
+
+
+def get_terminal_size():
+    return terminal.get_terminal_size()
+    
+
+def get_vieport_width(terminal_size, margins):
+    if not isinstance(margins, list):
+        margins = [margins]
+    (terminal_width, terminal_heght) = terminal_size
+    margins = [(terminal_width - (left_margin + right_margin)) for (left_margin, right_margin) in margins]
+    if margins:
+        return min(margins)
+    return terminal_width
+
+
+def render(lines, terminal_size, margins):
+    width = get_vieport_width(terminal_size, margins) 
+
+
+def split_to_lines(args):
+    lines = []
+    for arg in args:
+        lines += map(lambda x: x.strip(), arg.split('\n'))
+    return [re.split(r'\s+', line) for line in lines]
+
+
+def main():
+    terminal_size = get_terminal_size()
+    lines = split_to_lines(sys.argv[1:])
+    render(lines, terminal_size, [(LEFT_EDGE_MARGIN, RIGHT_EDGE_MARGIN), (LEFT_MARGIN, RIGHT_MARGIN)])
+
+    
+if __name__ == '__main__':
+    main()
+
