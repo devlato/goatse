@@ -1,4 +1,4 @@
 goatse
 ======
 
-console util samne as cowsay but with text inside the extended goatse anus
+console util similar to cowsay but with text inside the extended goatse anus
